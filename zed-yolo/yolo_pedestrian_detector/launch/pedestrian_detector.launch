@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="names_file"          default="$(find yolo_pedestrian_detector)/../libdarknet/data/coco.names" />
+    <arg name="cfg_file"            default="$(find yolo_pedestrian_detector)/../libdarknet/cfg/yolov3.cfg" />
+    <arg name="weights_file"        default="$(find yolo_pedestrian_detector)/../libdarknet/weights/yolov3.weights" />
+    <arg name="camera_frame_id"     default="camera_link" />
+    <arg name="object_name"    	    default="person" />  <!-- this name has to comply with one of the coco classes -->
+    <arg name="loop_rate_param"     default="20" />   
+    <arg name="confidence_thresh"   default="0.25" />  <!-- Detections with a confidence lower than this threshold will be discarded -->
+    
+    <node name="yolo_pedestrian_detector" pkg="yolo_pedestrian_detector" type="yolo_pedestrian_detector" output="screen">
+        <param name="names_file"          value="$(arg names_file)" />
+	<param name="cfg_file"            value="$(arg cfg_file)" />
+	<param name="weights_file"        value="$(arg weights_file)" />
+	<param name="camera_frame_id"     value="$(arg camera_frame_id)" />
+	<param name="object_name"    	  value="$(arg object_name)" />
+	<param name="loop_rate_param"     value="$(arg loop_rate_param)" />
+	<param name="confidence_thresh"   value="$(arg confidence_thresh)" />
+
+	<remap from="detections_output"   to="yolo_pedestrian_detector/detected_persons"/>
+	<remap from="detections_image"    to="yolo_pedestrian_detector/detected_persons/image"/>
+    </node>
+</launch>

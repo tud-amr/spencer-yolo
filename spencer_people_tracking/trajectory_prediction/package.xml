@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>trajectory_prediction</name>
+  <version>1.0.1</version>
+  <description>Publish information needed for pedestrian trajectory prediction</description>
+  
+  <maintainer email="ph.andermatt@gmail.com">Philipp Andermatt</maintainer>
+  <license>Academic/research use only</license>
+  <url type="website">todo</url>
+  <author email="ph.andermatt@gmail.com">Philipp Andermatt</author>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>spencer_tracking_msgs</build_depend>
+  <build_depend>tf</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>spencer_tracking_msgs</run_depend>
+  <run_depend>tf</run_depend>
+
+  <export/>
+<build_depend>roslib</build_depend><run_depend>roslib</run_depend></package>

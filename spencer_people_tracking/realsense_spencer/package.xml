@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<package>
+  <name>realsense_spencer</name>
+  <version>2.1.1</version>
+  <description>make realsense work with spencer</description>
+  <maintainer email="ph.andermatt@gmail.com">Philipp Andermatt</maintainer>
+  <license>Apache 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

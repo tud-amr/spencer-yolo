@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>yolo_pedestrian_detector</name>
+  <version>1.1.4</version>
+  <description>Detect people using the YOLO object detector and a ZED camera. This work is based on the zed-yolo wrapper from stereolabs</description>
+  <maintainer email="ph.andermatt@gmail.com">Philipp Andermatt</maintainer>
+  <license>BSD</license>
+  <url type="website">https://github.com/PhiAbs/zed-yolo</url>
+  <author email="ph.andermatt@gmail.com">Philipp Andermatt</author>>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>spencer_tracking_msgs</build_depend>
+
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>genmsg</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>cv_bridge</depend>
+
+</package>

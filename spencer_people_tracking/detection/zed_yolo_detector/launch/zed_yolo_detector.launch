@@ -1,0 +1,8 @@
+<launch>
+    <node pkg="zed_yolo_detector" type="fill_detected_person_message_yolo" name="fill_detected_person_message_yolo" output="screen">
+        <param name="detected_persons_topic"  value="/spencer/perception_internal/detected_persons/rgbd_front_top/yolo" type="string"/>
+        <param name="person_listener"   value="/yolo_pedestrian_detector/detected_persons" type="string"/>
+        
+        <remap from="output" to="/spencer/perception_internal/detected_persons/rgbd_front_top/yolo"/>
+    </node>
+</launch> 
