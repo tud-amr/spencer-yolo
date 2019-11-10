@@ -18,16 +18,16 @@ The most important features of this package are listed here:
 
 Below one can see YOLO detections in an RGB image and the visualizations in rviz. Yellow boxes: LIDAR based detections. Blue boxes: YOLO detections
 
-<a href="https://youtu.be/Abm3NSPFdbk" target="_blank">
+<p align='center' href="https://youtu.be/Abm3NSPFdbk" target="_blank">
 <img src="images/tracking_5_persons_img.jpg" width="600"></img>
-</a>
+</p>
 
 <p align='center'>
 <img src="images/tracking_5_persons_sim.jpg" width="600"></img>
 </p>
 
 
-## Sensor Requirements
+## Hardware Requirements
 This package has been tested with the following Sensors:
 - [Velodyne VLP16 LIDAR](https://velodynelidar.com/vlp-16.html)
 - [Stereolabs ZED Stereo camera](https://www.stereolabs.com/zed/)
