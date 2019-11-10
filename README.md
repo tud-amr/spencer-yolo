@@ -18,12 +18,14 @@ The most important features of this package are listed here:
 
 Below one can see YOLO detections in an RGB image and the visualizations in rviz. Yellow boxes: LIDAR based detections. Blue boxes: YOLO detections
 
-<a href="https://youtu.be/Abm3NSPFdbk" target="_blank">
+<p align='center' >
+<a align='center' href="https://youtu.be/Abm3NSPFdbk" target="_blank">
 <img src="images/tracking_5_persons_img.jpg" width="600"></img>
 </a>
 
-<p align='center'>
+<a align='center'>
 <img src="images/tracking_5_persons_sim.jpg" width="600"></img>
+</a>
 </p>
 
 
