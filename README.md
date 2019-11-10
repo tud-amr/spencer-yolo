@@ -18,11 +18,13 @@ The most important features of this package are listed here:
 
 Below one can see YOLO detections in an RGB image and the visualizations in rviz. Yellow boxes: LIDAR based detections. Blue boxes: YOLO detections
 
-<p align='center'>
+<a href="https://youtu.be/Abm3NSPFdbk" target="_blank">
 <img src="images/tracking_5_persons_img.jpg" width="600"></img>
+</a>
+
+<p align='center'>
 <img src="images/tracking_5_persons_sim.jpg" width="600"></img>
 </p>
-
 
 
 ## Sensor Requirements
@@ -92,3 +94,5 @@ One must publish the camera's and LIDAR's tf. This can be done in the launch fil
     roslaunch spencer_people_tracking_launch tracking_with_yolo.launch
 
 
+## References
+[Link](https://drive.google.com/file/d/17gYQlm1KNR1uVZGOEhCawVPUrMDU37_R/view?usp=sharing) to Semester Thesis.
