@@ -40,7 +40,7 @@ This package has been tested with the following Sensors:
 - cuDNN 7.6
 - [ZED SDK for Ubuntu 16.04 and CUDA 9.0](https://www.stereolabs.com/developers/release/#sdkdownloads_anchor)
 - ROS Kinetic
-- OpenCV 2.4 (follow [this](https://gist.github.com/sedovolosiy/6711123a9e5a73a6ce519e80338d0067) guide. Careful: it might be that for the cmake command, you have to add -D WITH_CUDA=OFF)
+- OpenCV 2.4 (follow [this](https://gist.github.com/sedovolosiy/6711123a9e5a73a6ce519e80338d0067) guide. You might have to add -D WITH_CUDA=OFF to the cmake command)
 
 ## Installation
 Create Catkin workspace, clone the repo and install dependencies:
