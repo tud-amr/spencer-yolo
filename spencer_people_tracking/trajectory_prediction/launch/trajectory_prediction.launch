@@ -1,0 +1,18 @@
+<launch>
+    <arg name="yolo_confirmed_tracks_topic"  default="/spencer/perception/tracked_persons_confirmed_by_yolo"/>
+    <arg name="num_sectors" default="72"/>              <!-- number of angular sectors around each pedestrian. the higher the number, the better the angular accuracy -->
+    <arg name="max_range" default="6.0"/>               <!-- maximum distance up to which pedestrians are stored in the pedestrian grid around a query pedestrian -->
+    <arg name="local_tf_prefix" default="person_"/>     <!-- Name of the tf for each pedestrian. This is followed by the tracking_id of the pedestrian -->
+    <arg name="costmap_node_prefix" default="costmap_"/>
+
+    <node pkg="trajectory_prediction" type="trajectory_prediction" name="trajectory_prediction" output="screen">
+        <param name="yolo_confirmed_tracks_topic"  value="$(arg yolo_confirmed_tracks_topic)"/>
+        <param name="num_sectors" value="$(arg num_sectors)"/>
+        <param name="max_range" value="$(arg max_range)"/>
+        <param name="local_tf_prefix" value="$(arg local_tf_prefix)"/>
+        <param name="costmap_node_prefix" value="$(arg costmap_node_prefix)"/>
+
+        <remap from="output_local_velocities" to="/spencer/trajectory_prediction/persons_local_information"/>
+        <remap from="output_apg" to="/spencer/trajectory_prediction/apg"/>
+    </node>
+</launch> 

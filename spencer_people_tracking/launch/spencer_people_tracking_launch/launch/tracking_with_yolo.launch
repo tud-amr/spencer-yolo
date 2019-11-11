@@ -1,0 +1,66 @@
+<launch>
+    <!-- Launch file arguments -->
+
+    <arg name="use_laser_detector" default="true"/>  <!-- use laser detector?-->
+    <arg name="use_yolo_detector" default="true"/> <!-- use data-driven YOLO detector? -->
+    
+    <arg name="use_upper_body_detector" default="false"/> <!-- use depth-template-based upper-body detector? -->
+    <arg name="use_pcl_detector" default="false"/> <!-- use ROI-HOG detector from PCL library? cannot be used with upper-body detector at the same time! -->
+    <arg name="use_hog_detector" default="false"/> <!-- use RGB groundHOG detector? Requires cudaHOG library-->
+
+    <arg name="dummy_transforms" default="false"/> <!-- publish TF transform for sensor to groundplane -->
+    <arg name="height_above_ground" default="0.8"/>  <!-- only used for dummy transform -->
+    <arg name="camera_x_offset" default="0.1"/>  <!-- only used for dummy transform -->
+
+    <arg name="visualization" default="true"/>
+    <arg name="rviz_config_file" default="$(find spencer_people_tracking_launch)/rviz/tracking-rgbd-laser.rviz"/>
+
+    <!-- Set ground plane distance -->
+    <rosparam param="/spencer/perception_internal/people_detection/ground_plane/distance" subst_value="true">$(arg height_above_ground)</rosparam>
+
+    <!-- Set up dummy transforms into an imaginary robot and odom frame -->
+    <group if="$(arg dummy_transforms)">
+        <node name="tf_odom_base"      pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 odom base_link 10"/>
+        <node name="tf_base_link"      pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 base_link base_footprint 10"/>
+        <node name="tf_base_camera"      pkg="tf" type="static_transform_publisher" args="$(arg camera_x_offset) 0 $(arg height_above_ground) -1.570796 0 -1.570796 base_footprint camera_link 10"/>
+        <node name="tf_camera" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 camera_link rgbd_front_top_link 10"/>
+    </group>
+
+    <!-- RGB-D detectors -->
+    <include file="$(find spencer_people_tracking_launch)/launch/detectors/yolo_front_rgbd_detectors.launch">
+        <arg name="upper_body" value="$(arg use_upper_body_detector)"/>
+        <arg name="yolo_detector" value="$(arg use_yolo_detector)"/>
+        <arg name="pcl_detector" value="$(arg use_pcl_detector)"/>
+        <arg name="hog" value="$(arg use_hog_detector)"/>
+    </include>
+
+    <!-- Laser detectors -->
+    <include file="$(find spencer_people_tracking_launch)/launch/detectors/yolo_laser_detectors.launch" if="$(arg use_laser_detector)">
+        <arg name="low_confidence_detections" value="true"/>
+    </include>
+
+    <!-- Static calibration for Laser Detections -->
+    <include file="$(find static_calibration)/launch/static_calibration.launch" if="$(arg use_laser_detector)">
+    </include>
+
+    <!-- People tracking -->
+    <include file="$(find spencer_people_tracking_launch)/launch/tracking/freiburg_people_tracking.launch">
+        <arg name="rgbd" default="true"/>
+        <arg name="yolo" value="$(arg use_yolo_detector)"/>
+        <arg name="upper_body" value="true" if="$(eval use_upper_body_detector or use_pcl_detector)"/>
+        <arg name="laser_low_confidence_detections" default="true"/>
+    </include>
+
+
+    <!-- Trajectory prediction: publish required information -->
+    <include file="$(find trajectory_prediction)/launch/trajectory_prediction.launch">
+        <arg name="yolo_confirmed_tracks_topic" default="/spencer/perception/tracked_persons_confirmed_by_yolo" />
+    </include>
+
+    <!-- Group tracking OFF -->
+    <!-- <include file="$(find spencer_people_tracking_launch)/launch/tracking/group_tracking.launch"/> -->
+
+    <!-- VISUALIZATION -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_config_file)" required="false" if="$(arg visualization)"/>
+
+</launch>

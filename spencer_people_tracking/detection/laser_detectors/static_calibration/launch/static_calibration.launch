@@ -1,0 +1,10 @@
+<launch>
+    <node pkg="static_calibration" type="static_calibration_laser_detections" name="static_calibration_laser_detections" output="screen">
+        <param name="detected_persons" value="/spencer/perception_internal/detected_persons/laser_front/uncalibrated"/>
+        <param name="detected_persons_high_recall" value="/spencer/perception_internal/detected_persons/laser_front_high_recall/uncalibrated"/>
+        <param name="static_calibration_offset_x" value="0.112"/>
+
+        <remap from="output" to="/spencer/perception_internal/detected_persons/laser_front"/>    
+        <remap from="output_high_recall" to="/spencer/perception_internal/detected_persons/laser_front_high_recall"/>
+    </node>
+</launch> 
